@@ -1,10 +1,10 @@
 class Hotel
 
-  attr_reader :name, :date, :rooms, :booking 
+  attr_reader :name, :date, :rooms 
   
-  def initialize(name)
+  def initialize(name, date)
     @name = name
-    # @date = date
+    @date = date
     @rooms = {}
   end
 
@@ -52,7 +52,7 @@ class Hotel
     puts "The revenue from todays bookings is £#{todays_revenue}"
   end
 
-  # h
+  
 
   
 
