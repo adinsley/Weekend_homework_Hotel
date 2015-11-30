@@ -6,22 +6,58 @@ require_relative('booking')
 # hotel = Hotel.new("Hilton", "23rd")
 
 
-rooms = 10.times.map { |i| Room.new((i+1), 2) }
+rooms_double = 10.times.map { |i| Room.new((i+1), 2) } 
+rooms_single = 10.times.map { |i| Room.new((i+11), 1) } 
 
 hotel = Hotel.new('Hilton')
 
-rooms.each { |room| hotel.add_room(room) }
+rooms_double.each { |room| hotel.add_room(room) }
+rooms_single.each { |room| hotel.add_room(room) }
+
+
 
 # Get hotel Capacity_____________________________
-puts hotel.hotel_capacity
+
 
 # Take some bookings
 hotel.rooms[1].take_booking(Booking.new("Andrew", 2, "15th", "17th"))
-hotel.rooms[2].take_booking(Booking.new("Andrew", 2, "15th", "17th"))
+hotel.rooms[2].take_booking(Booking.new("David", 2, "15th", "17th"))
 
-# Show occupancy of the hotel
-hotel.hotel_occupancy
+hotel.rooms[3].take_booking(Booking.new("Carrie", 4, "15th", "17th"))
+
+
+hotel.rooms[15].take_booking(Booking.new("Ray", 1, "15th", "17th"))
+
+
+
+
+
+
+
+
+
+# Make so can't double  book a room
+hotel.rooms[3].take_booking(Booking.new("Carrie", 1, "15th", "17th"))
+
+# Show availability of the hotel
+
 hotel.hotel_availability
+
+
+# This will show a list of the rooms available
+
+hotel.list_rooms
+
+# Amount of people in the hotel________________
+
+hotel.people_in_hotel
+
+#Money being made
+hotel.revenue
+
+
+binding.pry; ''
+
 
 
 

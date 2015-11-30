@@ -11,35 +11,22 @@ class Room
   end
 
   def take_booking(booking)
+
+    if booking.number_of_people > occupancy
+      puts "Room is not big enough for group size. Max occupancy is #{occupancy}"
+    elsif @bookings == {}
     @bookings[booking.surname] = booking
+    else  
+      puts "Room is already booked"
+    end
   end
 
-  def room_string
-    "Room #{@number} has a max occupancy of #{@occupancy}"
+  def get booking_names
+    @booking.map{|key, booking| booking.surname}
   end
-
-  # def features
-  #   puts "Room has following features: Single Bed, Sat TV, Mini-Bar, well equipped bathroom"
-  # end
-
-  # def occupancy_max
-  #   @occupancy
-  # end
-
+ 
 end
 
-# class DoubleRoom < Room
 
-#   def occupancy_max
-#     @occupancy * 2
-#   end
 
-#   def rack_rate
-#     @rate * 1.75
-#   end
 
-#   def features
-#     puts "Room has following features: Double Bed, Sat TV, Mini-Bar, well equipped bathroom"
-#   end
-
-# end

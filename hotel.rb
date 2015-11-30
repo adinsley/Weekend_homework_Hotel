@@ -1,6 +1,6 @@
 class Hotel
 
-  attr_reader :name, :date, :rooms, :booking
+  attr_reader :name, :date, :rooms, :booking 
   
   def initialize(name)
     @name = name
@@ -14,14 +14,13 @@ class Hotel
 
 
   def list_rooms
-    if @rooms.empty?
-      puts "No rooms"
-        else
-          room_list_string = @rooms.map do |key, room| 
-            room.room_string
-        end
+    @rooms.each do |key, room|
+      if room.bookings !={}
+      puts "#{room.number} is not available, it is booked by #{room.bookings.map {|key, booking| booking.surname}[0]}"
+      else 
+      puts  "Room #{room.number} has a max occupancy of #{room.occupancy} tonights rate is £#{room.rate}"
+      end
     end
-        room_list_string.join("\n")
   end
 
   def hotel_capacity
@@ -29,11 +28,11 @@ class Hotel
     capacity_array.inject(:+)
   end
 
-  def hotel_occupancy
-    occupancy =0
-    @rooms.each{|k, room| occupancy += room.occupancy if room.bookings != {}}
-    puts "Occupancy of hotel is #{occupancy}"
-  end
+  # def hotel_occupancy
+  #   occupancy =0
+  #   @rooms.each{|k, room| occupancy += room.occupancy if room.bookings != {}}
+  #   puts "Occupancy of hotel is #{occupancy}"
+  # end
 
   def hotel_availability
     availability = 0
@@ -41,11 +40,19 @@ class Hotel
     puts "Availability in #{@name} is #{availability}"
   end
 
-  def check_in(surname, room_number)
-    group = @booking[surname]
-    room = @room.delete(room_number)
-    booking1.arrival(room)
+  def people_in_hotel
+    occupancy = 0
+    @rooms.each{|key, room| occupancy += room.bookings.map{|key, booking| booking.number_of_people}[0] if room.bookings != {} }
+    puts "There are #{occupancy} people in the hotel tonight"
   end
+
+  def revenue
+    todays_revenue = 0
+    @rooms.each{|k, room| todays_revenue += room.rate if room.bookings != {}}
+    puts "The revenue from todays bookings is £#{todays_revenue}"
+  end
+
+  # h
 
   
 
